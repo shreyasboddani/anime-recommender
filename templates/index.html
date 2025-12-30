@@ -269,11 +269,11 @@
             z-index: 5;
         }
 
-        /* Image Area */
+
         .card-image {
             width: 100%;
             height: 65%;
-            /* Image takes up most of card */
+
             object-fit: cover;
             background: rgba(0, 0, 0, 0.2);
             transition: 0.5s;
@@ -281,7 +281,7 @@
 
         .anime-card:hover .card-image {
             height: 55%;
-            /* Image shrinks slightly to reveal text */
+
         }
 
         /* Content Area */
@@ -353,7 +353,7 @@
     <div class="main-wrapper">
 
         <div class="hero">
-            <h1>Find Your Next Obsession.</h1>
+            <h1>Anime Discovery.</h1>
             <p class="subtitle">AI-powered curation tailored to your taste.</p>
 
             <div class="search-container">
@@ -378,7 +378,7 @@
     <script>
         const input = document.getElementById('animeInput');
 
-        // Listen for Enter key
+
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') triggerSearch();
         });
@@ -390,13 +390,13 @@
             const grid = document.getElementById('grid');
             const status = document.getElementById('status');
 
-            // Reset
+
             grid.innerHTML = '';
             status.innerText = "Curating your list...";
             status.classList.add('active');
 
             try {
-                // 1. Backend Call (Get 10 Titles)
+
                 const res = await fetch('/recommend', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -409,10 +409,10 @@
                     return;
                 }
 
-                // This now shows the corrected name
+
                 status.innerText = `Analyzing neural path for: "${data.matched_name}"`;
 
-                // 2. Render Cards
+
                 data.recommendations.forEach((title, index) => {
                     spawnCard(title, index);
                 });
@@ -444,8 +444,7 @@
             // Pop-in Animation
             setTimeout(() => card.classList.add('visible'), index * 80);
 
-            // 3. Jikan API Fetch (With Stagger & Retry)
-            // Wait a bit to prevent rate limiting
+            //  Jikan API Fetch 
             await new Promise(r => setTimeout(r, index * 600));
 
             let animeData = null;
@@ -479,10 +478,10 @@
                         <div class="card-desc">${desc}</div>
                     </div>
                 `;
-                // Open link on click
+
                 card.onclick = () => window.open(animeData.url, '_blank');
             } else {
-                // If API fails, remove skeleton and keep text
+
                 card.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
             }
         }

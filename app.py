@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import pickle
 import pandas as pd
-import difflib  # <--- This is the library that does the fuzzy matching
+import difflib
 
 app = Flask(__name__)
 
@@ -14,8 +14,7 @@ with open('model/indices_nn.pkl', 'rb') as f:
 with open('model/df_clean.pkl', 'rb') as f:
     df = pickle.load(f)
 
-# Create a list of all valid titles for the search engine to look through
-# We convert keys to a list so the matcher can scan them
+
 all_titles = list(indices.keys())
 
 print("System Ready.")
@@ -32,13 +31,11 @@ def recommend():
     user_input = request_data.get('anime_name', '')
 
     # --- SMART SEARCH LOGIC ---
-    # 1. Try an exact match first (Fastest)
+
     if user_input in indices:
         found_title = user_input
     else:
-        # 2. If not found, try to find the closest match
-        # n=1 means "give me the top 1 best match"
-        # cutoff=0.4 means "it doesn't have to be perfect, just 40% similar"
+
         closest_matches = difflib.get_close_matches(
             user_input, all_titles, n=1, cutoff=0.4)
 
@@ -50,7 +47,6 @@ def recommend():
     # --- RECOMMENDATION LOGIC ---
     idx = indices[found_title]
 
-    # Handle case where index might be a Series (duplicate titles in DB)
     if isinstance(idx, (pd.Series, pd.Index)):
         idx = idx.iloc[0]
 
@@ -76,8 +72,6 @@ def recommend():
         if len(recommendations) >= 10:
             break
 
-    # We send back the 'matched_name' so the frontend can tell the user
-    # "We found recommendations for [Corrected Name]"
     return jsonify({
         'recommendations': recommendations,
         'matched_name': found_title
