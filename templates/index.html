@@ -15,7 +15,6 @@
             --text-main: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --accent: #FF2E93;
-            /* Hot Pink */
         }
 
         * {
@@ -33,7 +32,7 @@
             position: relative;
         }
 
-        /* --- BACKGROUND MESH GRADIENTS (The "Full" Look) --- */
+        /* --- BACKGROUND --- */
         .ambient-light {
             position: fixed;
             top: 0;
@@ -45,7 +44,6 @@
             overflow: hidden;
         }
 
-        /* Moving Orbs of Color */
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -60,7 +58,6 @@
             background: #FF2E93;
             top: -10%;
             left: -10%;
-            animation-delay: 0s;
         }
 
         .orb-2 {
@@ -86,12 +83,8 @@
                 transform: translate(0, 0) scale(1);
             }
 
-            33% {
-                transform: translate(30px, -50px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
+            50% {
+                transform: translate(30px, -30px) scale(1.1);
             }
 
             100% {
@@ -99,7 +92,6 @@
             }
         }
 
-        /* Noise Overlay for Texture */
         .noise {
             position: fixed;
             top: 0;
@@ -122,7 +114,6 @@
             align-items: center;
         }
 
-        /* --- HERO SECTION --- */
         .hero {
             text-align: center;
             margin: 60px 0 80px 0;
@@ -133,7 +124,6 @@
         h1 {
             font-size: 4rem;
             font-weight: 800;
-            line-height: 1.1;
             margin-bottom: 20px;
             letter-spacing: -2px;
             background: linear-gradient(to right, #fff, #dadada);
@@ -145,53 +135,52 @@
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 40px;
-            font-weight: 400;
         }
 
-        /* --- MODERN SEARCH BAR --- */
+        /* --- CONTROLS CONTAINER (Search + Random) --- */
+        .controls-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search Bar */
         .search-container {
             position: relative;
-            width: 500px;
-            max-width: 100%;
-            margin: 0 auto;
+            flex-grow: 1;
         }
 
         .search-input {
             width: 100%;
-            padding: 22px 30px;
+            padding: 20px 30px;
             font-size: 1.1rem;
             font-weight: 600;
             color: white;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 100px;
-            /* Pill shape */
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             outline: none;
-            transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: 0.3s;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         .search-input:focus {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.02);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Search Icon */
         .search-btn {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: var(--white);
             border-radius: 50%;
             border: none;
@@ -206,13 +195,35 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .search-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: #000;
+        /* Random Button */
+        .random-btn {
+            width: 65px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
         }
 
-        /* --- STATUS PILL --- */
+        .random-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 46, 147, 0.3);
+            /* Pink glow */
+            border-color: var(--accent);
+        }
+
+        .random-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+        }
+
+        /* --- STATUS --- */
         .status-pill {
             margin-top: 20px;
             display: inline-block;
@@ -229,17 +240,15 @@
             opacity: 1;
         }
 
-        /* --- MASONRY GRID --- */
+        /* --- GRID --- */
         .grid-section {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 30px;
-            perspective: 1000px;
-            /* For 3D tilt effect */
         }
 
-        /* --- CARD DESIGN --- */
+        /* --- CARD --- */
         .anime-card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
@@ -247,14 +256,12 @@
             overflow: hidden;
             position: relative;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            /* Bouncy spring */
             cursor: pointer;
             opacity: 0;
             transform: translateY(40px) scale(0.95);
             display: flex;
             flex-direction: column;
             aspect-ratio: 2/3.5;
-            /* Tall aesthetic aspect ratio */
         }
 
         .anime-card.visible {
@@ -269,11 +276,9 @@
             z-index: 5;
         }
 
-
         .card-image {
             width: 100%;
             height: 65%;
-
             object-fit: cover;
             background: rgba(0, 0, 0, 0.2);
             transition: 0.5s;
@@ -281,16 +286,13 @@
 
         .anime-card:hover .card-image {
             height: 55%;
-
         }
 
-        /* Content Area */
         .card-content {
             padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
         }
 
@@ -326,7 +328,6 @@
             overflow: hidden;
         }
 
-        /* Skeleton Animation */
         .skeleton {
             background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
             background-size: 200% 100%;
@@ -351,57 +352,79 @@
     <div class="noise"></div>
 
     <div class="main-wrapper">
-
         <div class="hero">
-            <h1>Anime Discovery.</h1>
+            <h1>Anime Discovery</h1>
             <p class="subtitle">AI-powered curation tailored to your taste.</p>
 
-            <div class="search-container">
-                <input type="text" class="search-input" id="animeInput" placeholder="Enter an anime you love..."
-                    autocomplete="off">
-                <button class="search-btn" onclick="triggerSearch()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            <div class="controls-row">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="animeInput" placeholder="Enter an anime you love..."
+                        autocomplete="off">
+                    <button class="search-btn" onclick="triggerSearch()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <button class="random-btn" onclick="triggerSurprise()" title="Surprise Me">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="8" cy="8" r="1"></circle>
+                        <circle cx="16" cy="16" r="1"></circle>
+                        <circle cx="16" cy="8" r="1"></circle>
+                        <circle cx="8" cy="16" r="1"></circle>
                     </svg>
                 </button>
             </div>
+
             <div class="status-pill" id="status">Ready to explore.</div>
         </div>
 
-        <div class="grid-section" id="grid">
-        </div>
-
+        <div class="grid-section" id="grid"></div>
     </div>
 
     <script>
         const input = document.getElementById('animeInput');
-
+        const status = document.getElementById('status');
+        const grid = document.getElementById('grid');
 
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') triggerSearch();
         });
 
+        // --- SEARCH FUNCTION ---
         async function triggerSearch() {
             const query = input.value.trim();
             if (!query) return;
+            performRequest('/recommend', 'POST', { anime_name: query });
+        }
 
-            const grid = document.getElementById('grid');
-            const status = document.getElementById('status');
+        // --- SURPRISE FUNCTION ---
+        async function triggerSurprise() {
+            // Clear input so it looks like a fresh roll
+            input.value = '';
+            performRequest('/random', 'GET', null);
+        }
 
-
+        // --- SHARED REQUEST LOGIC ---
+        async function performRequest(endpoint, method, bodyData) {
             grid.innerHTML = '';
-            status.innerText = "Curating your list...";
+            status.innerText = "Consulting the Neural Link...";
             status.classList.add('active');
 
             try {
+                const options = {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+                if (bodyData) options.body = JSON.stringify(bodyData);
 
-                const res = await fetch('/recommend', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ anime_name: query })
-                });
+                const res = await fetch(endpoint, options);
                 const data = await res.json();
 
                 if (data.error) {
@@ -409,25 +432,23 @@
                     return;
                 }
 
+                // Update text to show what we are recommending based on
+                status.innerText = `Because you like (or rolled): "${data.matched_name}"`;
 
-                status.innerText = `Analyzing neural path for: "${data.matched_name}"`;
-
-
+                // Render Cards
                 data.recommendations.forEach((title, index) => {
                     spawnCard(title, index);
                 });
 
             } catch (err) {
-                status.innerText = "Connection Issue. Please restart server.";
+                status.innerText = "System Failure. Check connection.";
             }
         }
 
         async function spawnCard(title, index) {
-            const grid = document.getElementById('grid');
             const card = document.createElement('div');
             card.className = 'anime-card';
 
-            // Initial Skeleton State
             card.innerHTML = `
                 <div class="card-image skeleton"></div>
                 <div class="card-content">
@@ -441,10 +462,9 @@
             `;
             grid.appendChild(card);
 
-            // Pop-in Animation
             setTimeout(() => card.classList.add('visible'), index * 80);
 
-            //  Jikan API Fetch 
+            // Staggered API calls
             await new Promise(r => setTimeout(r, index * 600));
 
             let animeData = null;
@@ -452,7 +472,7 @@
                 try {
                     const apiRes = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(title)}&limit=1`);
                     if (apiRes.status === 429) {
-                        await new Promise(r => setTimeout(r, 2000)); // Rate limit hit, wait 2s
+                        await new Promise(r => setTimeout(r, 2000));
                         continue;
                     }
                     const json = await apiRes.json();
@@ -478,10 +498,8 @@
                         <div class="card-desc">${desc}</div>
                     </div>
                 `;
-
                 card.onclick = () => window.open(animeData.url, '_blank');
             } else {
-
                 card.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
             }
         }
